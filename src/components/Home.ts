@@ -1,5 +1,6 @@
 import { isElementInView } from '../utils';
 import Component from './Component';
+import ItemComponent from './Item';
 import Shelf from './Shelf';
 
 /**
@@ -14,6 +15,8 @@ export default class Home extends Component {
    */
   row = -1;
   col = -1;
+
+  selectedItem?: ItemComponent = null;
 
   /**
    * Fetches data from the server to populate the homepage.
@@ -57,16 +60,31 @@ export default class Home extends Component {
         mediaItem.classList.remove('active')
       );
 
-    // add active class to element being selected to style differently
-    const el = this.shelves[this.row].itemComponents[this.col];
-    el.element.classList.add('active');
+    try {
+      if (this.col === -1 || this.row === -1) {
+        throw new Error('selection out of bounds');
+      }
+      // add active class to element being selected to style differently
+      const itemCompoment = this.shelves[this.row].itemComponents[this.col];
+      itemCompoment.element.classList.add('active');
+      this.selectedItem = itemCompoment;
 
-    // check if element is in view, if not, scroll to it.
-    if (!isElementInView(el.element)) {
-      el.element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-      });
+      // check if element is in view, if not, scroll to it.
+      if (!isElementInView(itemCompoment.element)) {
+        itemCompoment.element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+        });
+        // selecting the very first item should make sure the scroll x position is 0
+        if (this.col === 0) {
+          this.shelves[this.row].element.scrollTo({
+            behavior: 'smooth',
+            left: 0,
+          });
+        }
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -78,7 +96,14 @@ export default class Home extends Component {
    * @param event KeyboardEvent
    */
   handleKeydown(event: KeyboardEvent) {
-    const keyPresses = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+    const keyPresses = [
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight',
+      'Enter',
+      'Escape',
+    ];
     if (keyPresses.includes(event.key)) {
       // initial base case to start keyboard navigation
       if (this.col === -1 && this.row === -1) {
@@ -104,6 +129,10 @@ export default class Home extends Component {
             this.col = 0;
           }
         }
+      }
+
+      if (event.key === 'Enter') {
+        console.log('selected', this.selectedItem);
       }
 
       event.preventDefault();

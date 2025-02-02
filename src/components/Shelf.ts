@@ -17,7 +17,7 @@ export class Shelf extends Component {
   /**
    * Reference to each item within the shelf.
    */
-  itemComponents: Component[] = [];
+  itemComponents: ItemComponent[] = [];
 
   constructor(parent: HTMLElement, data: any) {
     super(parent);

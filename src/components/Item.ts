@@ -61,7 +61,6 @@ export class Item extends Component {
 
     /**
      * lazy load images once they're within view of the page
-     * 
      */
     const lazyImages = document.querySelectorAll('img.lazy');
     const observer = new IntersectionObserver(
