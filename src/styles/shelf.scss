@@ -1,0 +1,19 @@
+.shelf {
+  padding: 1rem 2rem;
+  width: 100%;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .set-title {
+    margin: 0;
+    margin-bottom: 0.5rem;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .items-row {
+    display: flex;
+    gap: 1rem;
+  }
+}
