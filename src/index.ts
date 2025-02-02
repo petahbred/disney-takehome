@@ -1,5 +1,5 @@
 import Home from './components/Home';
-import './styles/main.scss';
+import './styles/index.scss';
 
 function App() {
   const app = document.getElementById('app');

@@ -1,0 +1,4 @@
+@use 'main';
+@use 'shelf';
+@use 'item';
+@import 'normalize.css'; // include to remove any base CSS inherited from the browser, provides a consistent foundation for adding CSS
