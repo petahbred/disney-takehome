@@ -47,17 +47,23 @@ export class Item extends Component {
     this.element.querySelector('small').innerText = title;
   }
 
+  handleImageLoadError(event: ErrorEvent) {
+    (event.target as HTMLImageElement).classList.add('hidden');
+    this.element.querySelector('.media-item__title').classList.remove('hidden');
+  }
+
   /**
    * Get the image URL with aspect ratio 1.78 to use for the tile. Adds the image url as
    * a data-src attribute to be later used by the lazy loading IntersectionObserver callback.
    */
   setImage() {
-    const itemElement = this.element.querySelector('.media-item__tile');
+    const img = this.element.querySelector('.media-item__img');
     // use landscape aspect ratio when retrieving image from the data
     const { url } =
       this.data.image.tile[TILE_ASPECT_RATIO][this.itemType]?.default ||
       this.data.image.tile[TILE_ASPECT_RATIO]?.default?.default;
-    itemElement.setAttribute('data-src', url);
+    img.setAttribute('data-src', url);
+    img.addEventListener('error', this.handleImageLoadError.bind(this));
 
     /**
      * lazy load images once they're within view of the page
@@ -83,8 +89,8 @@ export class Item extends Component {
   render() {
     return `
       <div class='media-item'>
-        <small class='media-title'></small>
-        <img class='lazy media-item__tile'/>
+        <small class='media-item__title hidden'></small>
+        <img class='lazy media-item__img'/>
       </div>
     `;
   }
