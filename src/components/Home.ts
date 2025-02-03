@@ -30,18 +30,25 @@ export default class Home extends Component {
   getData() {
     Collection.fetchHome()
       .then((containers) => {
-        const home = document.getElementById('home');
+        const homeContainer = document
+          .getElementById('home')
+          .querySelector('section.container') as HTMLElement;
         // populate the shelves
         containers.forEach((container: any) => {
-          const shelf = new Shelf(home, container);
+          const shelf = new Shelf(homeContainer, container);
           this.shelves.push(shelf);
         });
-
-        // Call registration of remote navigation after tiles are loaded in the DOM.
-        this.registerRemoteNavigation();
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        const home = document.getElementById('home');
+        home.classList.remove('loading');
+        home.querySelector('.loader').classList.add('hidden');
+
+        // Call registration of remote navigation after tiles are loaded in the DOM.
+        this.registerRemoteNavigation();
       });
   }
 
@@ -99,7 +106,7 @@ export default class Home extends Component {
       'ArrowRight',
       'Enter',
       'Escape',
-      'Backspace'
+      'Backspace',
     ];
     if (keyPresses.includes(event.key)) {
       // initial base case to start keyboard navigation
@@ -163,7 +170,9 @@ export default class Home extends Component {
 
   render(): string {
     return `
-      <main id='home'>
+      <main id='home' class='loading'>
+        <div class='loader'></div>
+        <section class='container'></section>
       </main>
     `;
   }

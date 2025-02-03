@@ -147,7 +147,7 @@ export class Modal extends Component {
       videoEl.appendChild(sourceEl);
       videoEl.load();
       videoEl.play();
-    }, 5000);
+    }, 3000);
 
     videoEl.addEventListener('ended', (event) => {
       videoEl.classList.add('hidden');

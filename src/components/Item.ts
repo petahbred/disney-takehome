@@ -62,7 +62,17 @@ export class Item extends Component {
     const { url } =
       this.data.image.tile[TILE_ASPECT_RATIO][this.itemType]?.default ||
       this.data.image.tile[TILE_ASPECT_RATIO]?.default?.default;
-    img.setAttribute('data-src', url);
+    const imageURL = new URL(url);
+    // Attempt to progressive image load the tiles
+    imageURL.searchParams.set('quality', '10');
+    imageURL.searchParams.set('width', '320');
+    const lowRes = imageURL.toString();
+    img.setAttribute('data-src', lowRes);
+
+    imageURL.searchParams.set('quality', '50');
+    const highRes = imageURL.toString();
+    img.setAttribute('data-high-res', highRes)
+
     img.addEventListener('error', this.handleImageLoadError.bind(this));
 
     /**
@@ -75,7 +85,12 @@ export class Item extends Component {
           if (entry.isIntersecting) {
             const img: HTMLImageElement = entry.target as HTMLImageElement;
             img.src = img.dataset.src;
-            img.classList.remove('lazy');
+            const higherRes = new Image();
+            higherRes.src = img.dataset?.highRes;
+            higherRes.onload = () => {
+              img.src = higherRes.src;
+              img.classList.remove('lazy', 'blur');
+            }
             observer.unobserve(img);
           }
         });
@@ -90,7 +105,7 @@ export class Item extends Component {
     return `
       <div class='media-item'>
         <small class='media-item__title hidden'></small>
-        <img class='lazy media-item__img'/>
+        <img class='lazy media-item__img blur'/>
       </div>
     `;
   }

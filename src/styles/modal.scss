@@ -20,6 +20,10 @@
     position: relative;
     overflow: hidden;
 
+    &.blur {
+      filter: blur(10px);
+    }
+
     .item-display__overlay {
       position: absolute;
       top: 0;

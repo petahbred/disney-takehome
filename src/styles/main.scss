@@ -12,4 +12,14 @@ main#home {
   width: 100%;
   color: white;
   overflow-x: hidden;
+
+  &.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .container {
+      display: none;
+    }
+  }
 }

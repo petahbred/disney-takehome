@@ -2,4 +2,5 @@
 @use 'shelf';
 @use 'item';
 @use 'modal';
+@use 'loader';
 @import 'normalize.css'; // include to remove any base CSS inherited from the browser, provides a consistent foundation for adding CSS

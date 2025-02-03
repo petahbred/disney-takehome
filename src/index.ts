@@ -7,4 +7,6 @@ function App() {
   app.innerHTML = homeComponent.render();
 }
 
-App();
+window.addEventListener('load', () => {
+  App();
+});
