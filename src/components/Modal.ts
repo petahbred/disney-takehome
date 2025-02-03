@@ -83,6 +83,16 @@ export class Modal extends Component {
         showTitle();
       });
       logoImage.src = logoURL;
+
+      logoImage.onerror = () => {
+        logoImage.classList.add('hidden');
+        this.element
+          .querySelector('.item-display__title')
+          .classList.remove('hidden');
+        this.element
+          .querySelector('.item-display__content')
+          .classList.add('no-logo');
+      };
     } catch (error) {
       console.error(error);
       showTitle();

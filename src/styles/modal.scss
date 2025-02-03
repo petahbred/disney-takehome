@@ -39,6 +39,10 @@
 
     .item-display__content {
       margin: 10rem;
+
+      &.no-logo {
+        z-index: 1;
+      }
     }
 
     #videoArt {
@@ -51,7 +55,7 @@
     }
 
     .item-display__title {
-      display: none;
+      font-size: 4rem;
     }
 
     .item-display__logo img.logo {
