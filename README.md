@@ -9,6 +9,7 @@ Demo application to recreate a Disney+ home page.
 - Side scrolling shelf of media.
 - Keyboard Navigation up/down/left/right/enter/back/etc.
 - Interaction and selection of a tile.
+- VideoArt usage when selecting a tile.
 
 ## Development
 
@@ -53,3 +54,7 @@ Being familiar with the component based frameworks and libraries such as Vue and
 ### Animations
 
 - Given more time I would have loved to add more animations and visual appeal to the application to really give it more magic. Some areas that could use animation include, the first paint or selecting a tile.
+
+### Image Error Handling
+
+- Would be nice to have more error handling and fallbacks for images that are slow or fail to load.
