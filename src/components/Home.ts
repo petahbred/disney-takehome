@@ -99,6 +99,7 @@ export default class Home extends Component {
       'ArrowRight',
       'Enter',
       'Escape',
+      'Backspace'
     ];
     if (keyPresses.includes(event.key)) {
       // initial base case to start keyboard navigation
@@ -131,8 +132,8 @@ export default class Home extends Component {
         this.selectItem(this.selectedItem);
       }
 
-      if (event.key === 'Escape') {
-        this.modal.remove();
+      if (event.key === 'Escape' || event.key === 'Backspace') {
+        this.modal?.remove();
       }
 
       event.preventDefault();
