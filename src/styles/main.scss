@@ -2,7 +2,11 @@
   box-sizing: border-box;
 }
 
-#main {
+body {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+main#home {
   background-color: rgb(26, 29, 41);
   min-height: calc(100vh);
   width: 100%;

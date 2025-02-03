@@ -1,4 +1,4 @@
-import { getElementFromString } from "../utils";
+import { getElementFromString } from '../utils';
 
 /**
  * Interface to enforce instance methods
@@ -24,10 +24,10 @@ export class Component implements ComponentImpl {
   /**
    * Component root element
    */
-  element: HTMLElement;
+  element: HTMLElement = null;
 
   /**
-   * 
+   *
    * @param parent Parent Element to which the Component's element will be injected into.
    * @param name Name of the component
    */
@@ -35,7 +35,9 @@ export class Component implements ComponentImpl {
     this.parent = parent;
     this.element = getElementFromString(this.render());
     this.parent.appendChild(this.element);
-    this.mounted();
+    requestAnimationFrame(() => {
+      this.mounted();
+    });
   }
 
   /**

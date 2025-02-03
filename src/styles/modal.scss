@@ -1,0 +1,64 @@
+.hidden {
+  display: none;
+}
+
+#itemDisplay {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgb(26, 29, 41);
+  z-index: 1000;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+
+  .item-display__main {
+    background-size: cover;
+    background-repeat: no-repeat;
+    flex: 0 0 auto;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+
+    .item-display__overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      background: linear-gradient(
+        0deg,
+        rgba(26, 29, 41, 1) 0%,
+        rgba(9, 9, 121, 0) 29%
+      );
+    }
+
+    .item-display__content {
+      margin: 10rem;
+    }
+
+    #videoArt {
+      position: absolute;
+    }
+
+    .item-display__title {
+      display: none;
+    }
+
+    .item-display__logo img.logo {
+      // attempt to remove the black background
+      mix-blend-mode: lighten;
+      // increase saturation due to the mix-blend-mode
+      filter: saturate(2);
+    }
+
+    .item-display__secondary {
+      text-align: center;
+    }
+  }
+
+  .item-display__info {
+    flex: 0 0 auto;
+  }
+}

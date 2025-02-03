@@ -1,6 +1,7 @@
 import { isElementInView } from '../utils';
 import Component from './Component';
 import ItemComponent from './Item';
+import Modal from './Modal';
 import Shelf from './Shelf';
 
 /**
@@ -9,6 +10,9 @@ import Shelf from './Shelf';
 export default class Home extends Component {
   // Keep reference of each shelf
   shelves: Shelf[] = [];
+
+  // Modal reference
+  modal: Modal;
 
   /**
    * row and col - references to which item to select when using keyboard navigation
@@ -32,12 +36,11 @@ export default class Home extends Component {
         return response.json();
       })
       .then(({ data }: any) => {
-        const main = document.getElementById('main');
         const { containers } = data?.StandardCollection;
-
+        const home = document.getElementById('home');
         // populate the shelves
         containers.forEach((container: any) => {
-          const shelf = new Shelf(main, container);
+          const shelf = new Shelf(home, container);
           this.shelves.push(shelf);
         });
 
@@ -132,12 +135,24 @@ export default class Home extends Component {
       }
 
       if (event.key === 'Enter') {
-        console.log('selected', this.selectedItem);
+        this.selectItem(this.selectedItem);
+      }
+
+      if (event.key === 'Escape') {
+        this.modal.remove();
       }
 
       event.preventDefault();
       this.updateSelection();
     }
+  }
+
+  selectItem(item: ItemComponent) {
+    const home = document.getElementById('home');
+    this.modal = new Modal(home);
+    requestAnimationFrame(() => {
+      this.modal.showModal(item);
+    });
   }
 
   // register the keydown event handler for keyboard tile navigation
@@ -154,7 +169,7 @@ export default class Home extends Component {
 
   render(): string {
     return `
-      <main id='main'>
+      <main id='home'>
       </main>
     `;
   }
