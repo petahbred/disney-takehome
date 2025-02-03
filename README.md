@@ -37,7 +37,7 @@ Being familiar with the component based frameworks and libraries such as Vue and
 
 ### Unit Tests
 
-- Currently there are no unit tests. If given more time, I would follow Test-Driven development and prevent any build up of technical debt.
+- Currently there are no unit tests. If given more time, I would follow Test-Driven development to increase app reliability and reduce technical debt.
 
 ### End to End Testing
 
