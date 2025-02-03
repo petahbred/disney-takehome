@@ -64,3 +64,7 @@ Being familiar with the component based frameworks and libraries such as Vue and
 ### Documentation
 
 - Implementing JSDocs would further improve readability and onboarding. It will also help others figure out the intent of the code.
+
+### Image Logo Handling
+
+- Currently the images received have a black background. I used CSS `mix-blend-mode` and `filter` to make the images transparent.
