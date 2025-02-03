@@ -2,6 +2,8 @@
 
 Demo application to recreate a Disney+ home page.
 
+https://petahbred.github.io/disney-takehome/
+
 ![homepage](assets/home-screenshot.png)
 
 ## Features
