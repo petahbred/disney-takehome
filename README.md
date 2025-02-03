@@ -58,3 +58,7 @@ Being familiar with the component based frameworks and libraries such as Vue and
 ### Image Error Handling
 
 - Would be nice to have more error handling and fallbacks for images that are slow or fail to load.
+
+### Documentation
+
+- Implementing JSDocs would further improve readability and onboarding. It will also help others figure out the intent of the code.
