@@ -1,3 +1,4 @@
+import { Collection } from '../lib';
 import Component from './Component';
 import ItemComponent from './Item';
 
@@ -43,7 +44,7 @@ export class Shelf extends Component {
     // if items are defined, use the items within the dataset.
     if (this.items?.length > 0) {
       this.setItems();
-    // if items are dynamic and refid is defined, fetch items from the server
+      // if items are dynamic and refid is defined, fetch items from the server
     } else if (data.set?.refId) {
       this.fetchRef();
     }
@@ -57,16 +58,8 @@ export class Shelf extends Component {
    */
   fetchRef() {
     const { refId } = this.data.set;
-    return fetch(
-      `https://cd-static.bamgrid.com/dp-117731241344/sets/${refId}.json`
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error(response.statusText);
-      })
-      .then(({ data }) => {
+    Collection.fetchRef(refId)
+      .then((data: any) => {
         this.data = data;
         // Could be empty, keys are not known.
         this.items =

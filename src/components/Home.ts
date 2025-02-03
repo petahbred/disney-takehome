@@ -1,3 +1,4 @@
+import { Collection } from '../lib';
 import { isElementInView } from '../utils';
 import Component from './Component';
 import ItemComponent from './Item';
@@ -26,17 +27,9 @@ export default class Home extends Component {
    * Fetches data from the server to populate the homepage.
    * @returns Empty Promise
    */
-  getData(): Promise<void> {
-    return fetch('https://cd-static.bamgrid.com/dp-117731241344/home.json')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Error fetching data.');
-        }
-
-        return response.json();
-      })
-      .then(({ data }: any) => {
-        const { containers } = data?.StandardCollection;
+  getData() {
+    Collection.fetchHome()
+      .then((containers) => {
         const home = document.getElementById('home');
         // populate the shelves
         containers.forEach((container: any) => {

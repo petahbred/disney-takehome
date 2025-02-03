@@ -56,7 +56,6 @@ export class Modal extends Component {
 
   /**
    * Sets the logo image. Attempts to retrieve all known avialable keys to parse through the dataset. Any error occurs fetching the logo image, display the text title instead.
-   *
    */
   setLogo() {
     const showTitle = () => {
@@ -75,7 +74,6 @@ export class Modal extends Component {
         return;
       }
 
-      console.log('logo', imageObject);
       const logoURL = (Object.values(imageObject).pop() as any).default?.url;
       const logoImage = this.element.querySelector(
         '.item-display__logo img'
